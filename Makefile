@@ -5,12 +5,16 @@ TF_ROOT_DIR := terraform
 TERRAFORM = terraform -chdir=$(TF_ROOT_DIR)
 
 # Variables
-PROFILE ?= $(AWS_PROFILE)
 
 PROJECT := $(shell basename $(PWD))
-
 PLANFILE ?= $(PROJECT).plan
 
+REGION ?= eu-north-1
+
+TF_STATE_S3_BUCKET ?= mybucket
+TF_STATE_S3_KEY ?= $(REGION)/$(PROJECT).tfstate 
+
+ENVIRONMENT ?= dev
 # Targets
 
 ## lint.fmt: Validate terraform and running terraform fmt
@@ -37,14 +41,21 @@ deploy.tf: plan.tf apply.tf
 .PHONY: init.tf
 init.tf:
 	@rm -f $(TF_ROOT_DIR)/.terraform/terraform.tfstate
-	@$(TERRAFORM) init -upgrade
+	@$(TERRAFORM) init -upgrade \
+		-backend-config="bucket=${TF_STATE_S3_BUCKET}" \
+        -backend-config="key=$(TF_STATE_S3_KEY)" 
 
 ## plan.tf: Runs a terraform plan
 .PHONY: plan.tf
 plan.tf: init.tf lint.tf
 	$(call blue,"# Running terraform plan...")
 	@rm -f "$(PLANFILE)"
-	@$(TERRAFORM) plan -input=false -refresh=true $(PLAN_ARGS) -out="$(PLANFILE)"
+	@$(TERRAFORM) plan \
+		-input=false \
+		-var-file=vars/$(ENVIRONMENT).tfvars \
+		-var-file=vars/common.tfvars \
+		-refresh=true $(PLAN_ARGS) \
+		-out="$(PLANFILE)"
 
 ## apply.tf: Applies a planned state.
 .PHONY: apply.tf
@@ -65,6 +76,12 @@ destroy.tf::
 doc:
 	$(call blue,"# Generating terraform documentation...")
 	cd $(TF_ROOT_DIR) && terraform-docs markdown . --recursive --output-file README.md
+
+tf.import:
+	$(TERRAFORM) import \
+		-var-file=vars/$(ENVIRONMENT).tfvars \
+		-var-file=vars/common.tfvars \
+		$(TO) $(ID)
 
 ## help: prints this help message
 .PHONY: help

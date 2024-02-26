@@ -71,9 +71,16 @@ github_branch    = "<github-branch-you-want-to-deploy>"
 ```
 
 ```bash
-make plan.tf
+# Export Variables
+export AWS_PROFILE=<your_aws_profile>
+export AWS_REGION=<aws_region>
+export TF_STATE_S3_BUCKET=<your_terraform_backend_bucket>
 
-make apply.tf
+$ make init.tf
+
+$ make plan.tf
+
+$ make apply.tf
 ```
 
-
+For more commands run `make help`

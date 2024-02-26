@@ -9,6 +9,6 @@ Fork, then clone the repo:
 
 Push to your fork and [submit a pull request][pr].
 
-[pr]: https://github.com/evolate-ab/ecs-bg-deployment-example/compare/
+[pr]: https://github.com/RedeployAB/ecs-bg-deployment-example/compare/
 
 Please allow us some time to review the pull request, and we might suggest some changes, improvements or alternatives.
