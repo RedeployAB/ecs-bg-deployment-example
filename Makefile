@@ -69,7 +69,9 @@ apply.tf::
 destroy.tf::
 	$(call blue,"# Running terraform destroy...")
 	@if [ ! -r "${TF_ROOT_DIR}/$(PLANFILE)" ]; then echo "You need to plan first!" ; exit 14; fi
-	@$(TERRAFORM) destroy
+	@$(TERRAFORM) destroy \
+		-var-file=vars/$(ENVIRONMENT).tfvars \
+		-var-file=vars/common.tfvars
 
 ## doc: Generate terraform documentation
 .PHONY: doc

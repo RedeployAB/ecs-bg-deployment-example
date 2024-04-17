@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 resource "aws_codestarconnections_connection" "github" {
   name          = "github-connection"
   provider_type = "GitHub"
@@ -55,7 +57,7 @@ data "aws_iam_policy_document" "codepipeline" {
     actions = [
       "iam:PassRole"
     ]
-    resources = ["*"]
+    resources = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.service_name}-task-execution-role"]
   }
 
   statement {

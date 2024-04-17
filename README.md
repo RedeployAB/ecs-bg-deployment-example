@@ -78,9 +78,9 @@ export TF_STATE_S3_BUCKET=<your_terraform_backend_bucket>
 
 $ make init.tf
 
-$ make plan.tf
+$ [ENVIRONMENT=<environment>] make plan.tf
 
-$ make apply.tf
+$ [ENVIRONMENT=<environment>] make apply.tf
 ```
 
 For more commands run `make help`
