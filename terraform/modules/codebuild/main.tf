@@ -16,12 +16,30 @@ data "aws_iam_policy_document" "codebuild" {
   }
 
   statement {
+    sid    = "ECRAuthorizationPolicy"
+    effect = "Allow"
+    actions = [
+      "ecr:GetAuthorizationToken"
+    ]
+    resources = ["*"]
+  }
+
+  statement {
     sid    = "ECRPolicy"
     effect = "Allow"
     actions = [
-      "ecr:*"
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:GetImage",
+      "ecr:DescribeImages",
+      "ecr:InitiateLayerUpload",
+      "ecr:UploadLayerPart",
+      "ecr:CompleteLayerUpload",
+      "ecr:PutImage",
+      "ecr:ListImages"
     ]
-    resources = ["*"]
+    resources = ["arn:aws:ecr:${var.aws_region}:${data.aws_caller_identity.current.account_id}:repository/${var.project_name}"]
   }
 
   statement {
