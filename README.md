@@ -7,7 +7,7 @@ This repository shows how to deploy an ECS service using blue/green deployment v
 
 This is just an example and can be adapted for your purpose.
 
-In order to deploy the full example you also need to clone the [Hello repository](https://github.com/esgrano-evolate/hello) which is where the code for our service is stored.
+In order to deploy the full example you also need to clone the [Hello repository](https://github.com/esgrano-redeploy/hello) which is where the code for our service is stored.
 
 For more details please see the diagram [here](#architecture)
 
