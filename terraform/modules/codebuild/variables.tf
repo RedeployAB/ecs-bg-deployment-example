@@ -34,3 +34,8 @@ variable "github_token" {
   type        = string
   default     = ""
 }
+
+variable "artifact_bucket" {
+  description = "Bucket name for the codebuild artifacts"
+  type        = string
+}

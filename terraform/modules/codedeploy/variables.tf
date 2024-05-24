@@ -8,6 +8,11 @@ variable "ecs_cluster" {
   type        = string
 }
 
+variable "aws_region" {
+  description = "AWS Region"
+  type        = string
+}
+
 variable "service_alb_listener_arn" {
   description = "ARN of the Service ALB Listener"
   type        = string

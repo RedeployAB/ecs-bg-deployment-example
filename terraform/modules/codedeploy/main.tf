@@ -1,14 +1,6 @@
 data "aws_caller_identity" "current" {}
 
 data "aws_iam_policy_document" "codedeploy" {
-  statement {
-    sid    = "S3Polocy"
-    effect = "Allow"
-    actions = [
-      "s3:GetObject"
-    ]
-    resources = ["*"]
-  }
 
   statement {
     sid    = "ECSPolicy"
@@ -19,9 +11,13 @@ data "aws_iam_policy_document" "codedeploy" {
       "ecs:DeleteTaskSet",
       "ecs:UpdateServicePrimaryTaskSet"
     ]
-    resources = ["*"]
+    resources = [
+      "arn:aws:ecs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:service/${var.ecs_cluster}/${var.service_name}",
+      "arn:aws:ecs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:task-set/${var.ecs_cluster}/${var.service_name}/*"
+    ]
   }
 
+  # https://docs.aws.amazon.com/service-authorization/latest/reference/list_awselasticloadbalancingv2.html
   statement {
     sid    = "ELBPolicy"
     effect = "Allow"

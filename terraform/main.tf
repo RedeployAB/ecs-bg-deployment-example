@@ -16,7 +16,7 @@ module "my_service_task_definition" {
 
   service_name  = var.application_name
   ecr_image_url = "${data.aws_ecr_repository.my_repo.repository_url}:${var.image_tag}"
-  region        = var.aws_region
+  aws_region    = var.aws_region
 }
 
 # Create the ECS Service
@@ -40,6 +40,7 @@ module "my_service_blue_green_deployment" {
   service_alb_listener_arn        = module.my_service.alb_listener_arn
   service_blue_target_group_name  = module.my_service.blue_target_group_name
   service_green_target_group_name = module.my_service.green_target_group_name
+  aws_region                      = var.aws_region
 }
 
 # Create Codebuild project to build the docker image and push to ECR
@@ -47,6 +48,7 @@ module "my_service_codebuild" {
   source = "./modules/codebuild"
 
   project_name     = var.application_name
+  artifact_bucket  = var.artifact_bucket
   aws_region       = var.aws_region
   image_repo_name  = var.ecr_repo_name
   ecs_cluster_name = var.ecs_cluster
@@ -70,4 +72,5 @@ module "my_service_pipeline" {
   codebuild_project_name           = module.my_service_codebuild.project_name
   github_repo_id                   = var.github_repo_id
   github_branch                    = var.github_branch
+  aws_region                       = var.aws_region
 }

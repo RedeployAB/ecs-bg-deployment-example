@@ -30,6 +30,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_artifact_bucket"></a> [artifact\_bucket](#input\_artifact\_bucket) | Bucket name for the codebuild artifacts | `string` | n/a | yes |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS Region | `string` | n/a | yes |
 | <a name="input_ecs_cluster_name"></a> [ecs\_cluster\_name](#input\_ecs\_cluster\_name) | Name of the ECS Cluster where the service will be deployed | `string` | n/a | yes |
 | <a name="input_github_repo_url"></a> [github\_repo\_url](#input\_github\_repo\_url) | Url of the Github repository that contains the application code | `string` | n/a | yes |

@@ -43,10 +43,9 @@ data "aws_iam_policy_document" "codepipeline" {
       "codedeploy:CreateDeployment",
       "codedeploy:GetApplication",
       "codedeploy:GetApplicationRevision",
-      "codedeploy:RegisterApplicationRevision",
+      "codedeploy:GetDeployment",
       "codedeploy:GetDeploymentConfig",
-      "codedeploy:GetDeploymentGroup",
-      "codedeploy:GetDeployment"
+      "codedeploy:RegisterApplicationRevision"
     ]
     resources = ["*"]
   }
@@ -75,16 +74,18 @@ data "aws_iam_policy_document" "codepipeline" {
     sid    = "CodeBuildPolicy"
     effect = "Allow"
     actions = [
-      "codebuild:*"
+      "codebuild:ListProjects",
+      "codebuild:StartBuild",
+      "codebuild:BatchGetBuilds"
     ]
-    resources = ["*"]
+    resources = ["arn:aws:codebuild:${var.aws_region}:${data.aws_caller_identity.current.account_id}:project/${var.service_name}*"]
   }
 
   statement {
     sid    = "ECSPolicy"
     effect = "Allow"
     actions = [
-      "ecs:*"
+      "ecs:RegisterTaskDefinition"
     ]
     resources = ["*"]
   }

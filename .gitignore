@@ -51,8 +51,8 @@ terraform.rc
 # Other stuff
 .DS_Store
 
-# Evolate files
-*evolate.*
+# Redeploy files
+*redeploy.*
 
 TODO.md
 

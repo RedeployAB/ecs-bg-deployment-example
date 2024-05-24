@@ -9,6 +9,6 @@ ecr_repo_name = "hello"
 # URL of the Github repository
 github_repo_url = "https://github.com/esgrano-redeploy/hello.git"
 # ID of the repository <owner>/<repo>
-github_repo_id = "esgrano-evolate/hello"
+github_repo_id = "esgrano-redeploy/hello"
 # SSM path where the Github Token is stored. This is only needed if the repository is private. 
 github_token_ssm = "/ecs-bg-deployment-example/github-token"

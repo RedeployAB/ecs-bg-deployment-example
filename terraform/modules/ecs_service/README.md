@@ -50,5 +50,6 @@ No modules.
 | <a name="output_alb_listener_arn"></a> [alb\_listener\_arn](#output\_alb\_listener\_arn) | n/a |
 | <a name="output_blue_target_group_name"></a> [blue\_target\_group\_name](#output\_blue\_target\_group\_name) | n/a |
 | <a name="output_green_target_group_name"></a> [green\_target\_group\_name](#output\_green\_target\_group\_name) | n/a |
+| <a name="output_name"></a> [name](#output\_name) | n/a |
 | <a name="output_url"></a> [url](#output\_url) | n/a |
 <!-- END_TF_DOCS -->

@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "codebuild" {
       "s3:GetBucketAcl",
       "s3:GetBucketLocation"
     ]
-    resources = ["*"]
+    resources = ["arn:aws:s3:::${var.artifact_bucket}/*"]
   }
 
   statement {
@@ -50,18 +50,9 @@ data "aws_iam_policy_document" "codebuild" {
       "logs:CreateLogStream",
       "logs:PutLogEvents"
     ]
-    resources = ["*"]
+    resources = ["arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/codebuild/${var.project_name}*"]
   }
 
-
-  statement {
-    sid    = "ECSPolicy"
-    effect = "Allow"
-    actions = [
-      "ecs:DescribeTaskDefinition"
-    ]
-    resources = ["*"]
-  }
 }
 
 resource "aws_iam_role" "codebuild" {

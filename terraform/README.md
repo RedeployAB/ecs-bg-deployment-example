@@ -3,7 +3,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.5.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.7.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 5.6.0 |
 
 ## Providers
@@ -33,6 +33,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_application_name"></a> [application\_name](#input\_application\_name) | Name of the application you want to deploy on ECS | `string` | n/a | yes |
 | <a name="input_artifact_bucket"></a> [artifact\_bucket](#input\_artifact\_bucket) | Name of the S3 bucket that will be used by CodePipeline to store artifacts | `string` | n/a | yes |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS Region | `string` | `"eu-north-1"` | no |
 | <a name="input_ecr_repo_name"></a> [ecr\_repo\_name](#input\_ecr\_repo\_name) | Name of the ECR repository where the image is stored | `string` | n/a | yes |
@@ -41,9 +42,9 @@
 | <a name="input_github_repo_id"></a> [github\_repo\_id](#input\_github\_repo\_id) | Id of the Github repository (e.g. <owner>/<repository-name>) | `string` | n/a | yes |
 | <a name="input_github_repo_url"></a> [github\_repo\_url](#input\_github\_repo\_url) | URL of the Git repository | `string` | n/a | yes |
 | <a name="input_github_token_ssm"></a> [github\_token\_ssm](#input\_github\_token\_ssm) | SSM Path where the github token is stored | `string` | `""` | no |
+| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Tag of the image you want to deploy | `string` | `"latest"` | no |
 | <a name="input_private_subnets"></a> [private\_subnets](#input\_private\_subnets) | Id of the private subnets for the ECS service | `list(string)` | n/a | yes |
 | <a name="input_public_subnets"></a> [public\_subnets](#input\_public\_subnets) | Id of the public subnets for the internet-facing ALB | `list(string)` | n/a | yes |
-| <a name="input_service_name"></a> [service\_name](#input\_service\_name) | Name of the service you want to deploy on ECS | `string` | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | Id of the VPC where the Service will be deployed into | `string` | n/a | yes |
 
 ## Outputs
