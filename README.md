@@ -2,6 +2,9 @@
 
 This repository shows how to deploy an ECS service using blue/green deployment via Terraform.
 
+## Disclaimer
+
+Please read the [DISCLAIMER](DISCLAIMER.md) before using this code.
 
 ## Description
 
